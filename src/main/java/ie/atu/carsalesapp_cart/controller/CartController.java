@@ -17,24 +17,28 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @PostMapping
-    public String makeCart(@RequestBody Car car)
+    //@PostMapping
+    //public String makeCart(@RequestBody Car car)
+    //{
+      //  return "Microservice on port 8081 called";
+    //}
+
+    @PostMapping("/add")
+    public Cart addCarToCart(@RequestParam int car_id, @RequestParam int user_id, @RequestParam int quantity)
     {
-        return "Microservice on port 8081 called";
+        return cartService.addToCart(user_id, car_id, quantity);
     }
 
-    @PostMapping("/addToCart")
-    public ResponseEntity<String> addToCart(@RequestBody Car car, @RequestParam int userId)
+    @GetMapping
+    public double getTotal(@RequestParam int user_id)
     {
-        cartService.addCarToCart(userId, car);
-        return ResponseEntity.ok("Car added to cart");
+        return cartService.calcTotal(user_id);
     }
 
-    @GetMapping("/cart/{userId}")
-    public ResponseEntity<Cart> getCart(@PathVariable int userId)
+    @DeleteMapping
+    public void removeCarFromCart(@RequestParam int user_id, @RequestParam int car_id)
     {
-        Cart cart = cartService.getCart(userId);
-        return ResponseEntity.ok(cart);
+        cartService.removeFromCart(user_id, car_id);
     }
 
 }

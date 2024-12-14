@@ -19,14 +19,10 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cart_id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private List<Car> cars = new ArrayList<>();
+    private int user_id;
+    private int car_id;
 
-    private double total_price;
+    private int quantity;
 
-    public void addCar(Car car){
-        this.cars.add(car);
-        this.total_price += car.getCost();
-    }
+
 }

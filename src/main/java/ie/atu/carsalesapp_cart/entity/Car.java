@@ -37,12 +37,5 @@ public class Car {
     @NotNull(message="cost cannot be 0")
     private double cost;
 
-    public double getCost(){
-        return cost;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
 
 }
