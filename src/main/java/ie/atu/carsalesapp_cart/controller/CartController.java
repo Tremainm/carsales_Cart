@@ -1,20 +1,24 @@
 package ie.atu.carsalesapp_cart.controller;
 
+import ie.atu.carsalesapp_cart.client.CarCartClient;
 import ie.atu.carsalesapp_cart.entity.Car;
 import ie.atu.carsalesapp_cart.entity.Cart;
 import ie.atu.carsalesapp_cart.service.CartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/cart")
 public class CartController {
 
     private final CartService cartService;
+    private final CarCartClient carCartClient;
 
-    public CartController(CartService cartService) {
+    public CartController(CartService cartService, CarCartClient carCartClient) {
         this.cartService = cartService;
+        this.carCartClient = carCartClient;
     }
 
     @PostMapping
@@ -35,6 +39,15 @@ public class CartController {
     {
         Cart cart = cartService.getCart(userId);
         return ResponseEntity.ok(cart);
+    }
+
+    @GetMapping("/allcars")
+    public List<Car> getAllCarsFromCarService() {
+        return carCartClient.getAllCars();
+    }
+    @GetMapping("/car/{id}")
+    public Car getCarById(@PathVariable Long id){
+        return carCartClient.getCarById(id);
     }
 
 }
