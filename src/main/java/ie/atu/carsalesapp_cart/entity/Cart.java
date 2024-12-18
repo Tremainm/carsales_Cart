@@ -19,6 +19,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cart_id;
 
+    private int userId;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
     private List<Car> cars = new ArrayList<>();
@@ -28,5 +30,8 @@ public class Cart {
     public void addCar(Car car){
         this.cars.add(car);
         this.total_price += car.getCost();
+    }
+
+    public void setUserId(int userId) {
     }
 }
