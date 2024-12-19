@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Data
+//@Data
 @Table(name = "car")
 public class Car {
     @Id
@@ -37,12 +37,48 @@ public class Car {
     @NotNull(message="cost cannot be 0")
     private double cost;
 
-    public double getCost(){
+    @ManyToOne
+    @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
+    private Cart cart;
+
+
+    public int getCar_id() {
+        return car_id;
+    }
+
+    public void setCar_id(int car_id) {
+        this.car_id = car_id;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public double getCost() {
         return cost;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
 }

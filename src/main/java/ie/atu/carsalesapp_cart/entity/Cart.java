@@ -10,28 +10,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-@AllArgsConstructor
+//@Data
 @NoArgsConstructor
 @Table(name = "cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_id")
     private int cart_id;
 
-    private int userId;
+    @Column(name = "carMake")
+    private String carMake;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private List<Car> cars = new ArrayList<>();
+    @Column(name = "carModel")
+    private String carModel;
 
-    private double total_price;
+    @Column(name = "carYear")
+    private String carYear;
 
-    public void addCar(Car car){
-        this.cars.add(car);
-        this.total_price += car.getCost();
+    @Column(name = "carCost")
+    private double carCost;
+
+    @ManyToOne
+    @JoinColumn(name = "car_id", referencedColumnName = "car_id", nullable = false)
+    private Car car;
+
+    public Car getCar() {
+        return car;
+    }
+    public void setCar(Car car) {
+        this.car = car;
     }
 
-    public void setUserId(int userId) {
+    /*
+    public int getCart_id() {
+        return cart_id;
     }
+
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
+    }
+
+    public String getCarMake() {
+        return carMake;
+    }
+
+    public void setCarMake(String carMake) {
+        this.carMake = carMake;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getCarYear() {
+        return carYear;
+    }
+
+    public void setCarYear(String carYear) {
+        this.carYear = carYear;
+    }
+
+    public double getCarCost() {
+        return carCost;
+    }
+
+    public void setCarCost(double carCost) {
+        this.carCost = carCost;
+    }
+
+     */
 }
+

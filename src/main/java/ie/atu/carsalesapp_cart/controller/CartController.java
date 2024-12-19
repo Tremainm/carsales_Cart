@@ -24,37 +24,14 @@ public class CartController {
         this.carCartClient = carCartClient;
     }
 
-    @GetMapping("/items")
-    public ResponseEntity<Map<String, Object>> getCartItems(@RequestParam Long userId) {
-        List<Car> cars = cartService.getCarsInCart(userId);
-        double totalCost = cartService.calculateTotalCost(userId);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("userId", userId);
-        response.put("cartItems", cars);
-        response.put("total", totalCost);
-
-        return ResponseEntity.ok(response);
+    @PostMapping("/add/{carId}")
+    public Cart addCarToCart(@PathVariable int carId) {
+        return cartService.addCarToCart(carId);
     }
 
-    @PostMapping
-    public String makeCart(@RequestBody Car car)
-    {
-        return "Microservice on port 8081 called";
-    }
-
-    @PostMapping("/addToCart")
-    public ResponseEntity<String> addToCart(@Valid @RequestBody Car car, @RequestParam int userId)
-    {
-        cartService.addCarToCart(userId, car);
-        return ResponseEntity.ok("Car added to cart");
-    }
-
-    @GetMapping("/cart/{userId}")
-    public ResponseEntity<Cart> getCart(@Valid @PathVariable int userId)
-    {
-        Cart cart = cartService.getCart(userId);
-        return ResponseEntity.ok(cart);
+    @GetMapping("/total")
+    public double getTotalPrice() {
+        return cartService.getTotalPrice();
     }
 
     @GetMapping("/allcars")
@@ -65,5 +42,4 @@ public class CartController {
     public Car getCarById(@PathVariable Long id){
         return carCartClient.getCarById(id);
     }
-
 }
