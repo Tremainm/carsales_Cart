@@ -24,9 +24,9 @@ public class CartController {
         this.carCartClient = carCartClient;
     }
 
-    @PostMapping("/add/{carId}")
-    public Cart addCarToCart(@PathVariable int carId) {
-        return cartService.addCarToCart(carId);
+    @PostMapping("/add/{car_id}")
+    public Cart addCarToCart(@PathVariable Long car_id) {
+        return cartService.addCarToCart(car_id);
     }
 
     @GetMapping("/total")

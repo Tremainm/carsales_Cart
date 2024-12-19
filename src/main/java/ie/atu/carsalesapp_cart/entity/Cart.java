@@ -31,18 +31,17 @@ public class Cart {
     @Column(name = "carCost")
     private double carCost;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id", referencedColumnName = "car_id", nullable = false)
-    private Car car;
+    private Long car_id;
 
-    public Car getCar() {
-        return car;
-    }
-    public void setCar(Car car) {
-        this.car = car;
+
+    public Long getCar_id() {
+        return car_id;
     }
 
-    /*
+    public void setCar_id(Long car_id) {
+        this.car_id = car_id;
+    }
+
     public int getCart_id() {
         return cart_id;
     }
@@ -83,6 +82,6 @@ public class Cart {
         this.carCost = carCost;
     }
 
-     */
+
 }
 
