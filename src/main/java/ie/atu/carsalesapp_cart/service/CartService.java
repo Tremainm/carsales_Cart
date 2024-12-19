@@ -1,39 +1,43 @@
 package ie.atu.carsalesapp_cart.service;
 
+import ie.atu.carsalesapp_cart.client.CarCartClient;
 import ie.atu.carsalesapp_cart.entity.Car;
 import ie.atu.carsalesapp_cart.entity.Cart;
 import ie.atu.carsalesapp_cart.repository.CartRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class CartService {
-
     private final CartRepository cartRepository;
+    private final CarCartClient carCartClient;
 
-    private final Map<Integer, Cart> userCarts = new HashMap<>();
-
-    public CartService(CartRepository cartRepository){
+    public CartService(CartRepository cartRepository, CarCartClient carCartClient) {
         this.cartRepository = cartRepository;
+        this.carCartClient = carCartClient;
     }
 
-    public Cart getCart(int userId)
-    {
-        return userCarts.getOrDefault(userId, new Cart());
+    @Transactional
+    public Cart addCarToCart(Long car_id) {
+        Car car = carCartClient.getAllCars().stream()
+                .filter(c -> c.getCar_id() == car_id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Car not found"));
+
+        Cart cart = new Cart();
+        cart.setCar_id(car.getCar_id());
+        cart.setCarMake(car.getMake());
+        cart.setCarModel(car.getModel());
+        cart.setCarYear(car.getYear());
+        cart.setCarCost(car.getCost());
+
+        return cartRepository.save(cart);
     }
 
-    public void addCarToCart(int userId, Car car)
-    {
-        Cart cart = getCart(userId);
-        cart.addCar(car);
-        userCarts.put(userId, cart);
-    }
-
-    public Cart getCarById(long cartId)
-    {
-        return cartRepository.findById(cartId).orElseThrow(()-> new RuntimeException("Cart not found"));
+    public double getTotalPrice() {
+        return cartRepository.findAll().stream()
+                .mapToDouble(Cart::getCarCost)
+                .sum();
     }
 }

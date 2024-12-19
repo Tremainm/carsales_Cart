@@ -4,10 +4,13 @@ import ie.atu.carsalesapp_cart.client.CarCartClient;
 import ie.atu.carsalesapp_cart.entity.Car;
 import ie.atu.carsalesapp_cart.entity.Cart;
 import ie.atu.carsalesapp_cart.service.CartService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/cart")
@@ -21,24 +24,14 @@ public class CartController {
         this.carCartClient = carCartClient;
     }
 
-    @PostMapping
-    public String makeCart(@RequestBody Car car)
-    {
-        return "Microservice on port 8081 called";
+    @PostMapping("/add/{car_id}")
+    public Cart addCarToCart(@PathVariable Long car_id) {
+        return cartService.addCarToCart(car_id);
     }
 
-    @PostMapping("/addToCart")
-    public ResponseEntity<String> addToCart(@RequestBody Car car, @RequestParam int userId)
-    {
-        cartService.addCarToCart(userId, car);
-        return ResponseEntity.ok("Car added to cart");
-    }
-
-    @GetMapping("/cart/{userId}")
-    public ResponseEntity<Cart> getCart(@PathVariable int userId)
-    {
-        Cart cart = cartService.getCart(userId);
-        return ResponseEntity.ok(cart);
+    @GetMapping("/total")
+    public double getTotalPrice() {
+        return cartService.getTotalPrice();
     }
 
     @GetMapping("/allcars")
@@ -49,5 +42,4 @@ public class CartController {
     public Car getCarById(@PathVariable Long id){
         return carCartClient.getCarById(id);
     }
-
 }
