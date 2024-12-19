@@ -24,6 +24,16 @@ public class CartController {
         this.carCartClient = carCartClient;
     }
 
+    @GetMapping("/allcart")
+    public List<Cart> getCart() {
+        return cartService.getAllCarts();
+    }
+
+    @DeleteMapping("/{car_id}")
+    public String removeFromCart(@PathVariable Long car_id) {
+        return cartService.removeFromCart(car_id);
+    }
+
     @PostMapping("/add/{car_id}")
     public Cart addCarToCart(@PathVariable Long car_id) {
         return cartService.addCarToCart(car_id);
