@@ -20,16 +20,16 @@ public class Cart {
     private int cart_id;
 
     @Column(name = "carMake")
-    private String carMake;
+    private String make;
 
     @Column(name = "carModel")
-    private String carModel;
+    private String model;
 
     @Column(name = "carYear")
-    private String carYear;
+    private String year;
 
     @Column(name = "carCost")
-    private double carCost;
+    private double cost;
 
     private Long car_id;
 
@@ -50,36 +50,36 @@ public class Cart {
         this.cart_id = cart_id;
     }
 
-    public String getCarMake() {
-        return carMake;
+    public String getMake() {
+        return make;
     }
 
-    public void setCarMake(String carMake) {
-        this.carMake = carMake;
+    public void setMake(String make) {
+        this.make = make;
     }
 
-    public String getCarModel() {
-        return carModel;
+    public String getModel() {
+        return model;
     }
 
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
+    public void setModel(String model) {
+        this.model = model;
     }
 
-    public String getCarYear() {
-        return carYear;
+    public String getYear() {
+        return year;
     }
 
-    public void setCarYear(String carYear) {
-        this.carYear = carYear;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    public double getCarCost() {
-        return carCost;
+    public double getCost() {
+        return cost;
     }
 
-    public void setCarCost(double carCost) {
-        this.carCost = carCost;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
 
