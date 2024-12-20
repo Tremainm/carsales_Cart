@@ -26,18 +26,18 @@ public class CartService {
     }
 
     @Transactional
-    public String removeFromCart(Long car_id) {
+    public String removeFromCart(Long cart_id) {
         List<Cart> carsToRemove = cartRepository.findAll().stream()
-                .filter(cart -> cart.getCar_id().equals(car_id))
+                .filter(cart -> cart.getCart_id().equals(cart_id))
                 .toList();
 
         if(carsToRemove.isEmpty())
         {
-            throw new RuntimeException("Car with ID " + car_id + " not found in cart");
+            throw new RuntimeException("Car with cart ID " + cart_id + " not found in cart");
         }
         cartRepository.deleteAll(carsToRemove);
 
-        return "Car with ID " + car_id + " removed from car cart";
+        return "Car with cart ID " + cart_id + " removed from car cart";
     }
 
     @Transactional
