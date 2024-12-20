@@ -49,17 +49,17 @@ public class CartService {
 
         Cart cart = new Cart();
         cart.setCar_id(car.getCar_id());
-        cart.setCarMake(car.getMake());
-        cart.setCarModel(car.getModel());
-        cart.setCarYear(car.getYear());
-        cart.setCarCost(car.getCost());
+        cart.setMake(car.getMake());
+        cart.setModel(car.getModel());
+        cart.setYear(car.getYear());
+        cart.setCost(car.getCost());
 
         return cartRepository.save(cart);
     }
 
     public double getTotalPrice() {
         return cartRepository.findAll().stream()
-                .mapToDouble(Cart::getCarCost)
+                .mapToDouble(Cart::getCost)
                 .sum();
     }
 }
