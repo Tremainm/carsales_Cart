@@ -29,9 +29,9 @@ public class CartController {
         return cartService.getAllCarts();
     }
 
-    @DeleteMapping("/{car_id}")
-    public String removeFromCart(@PathVariable Long car_id) {
-        return cartService.removeFromCart(car_id);
+    @DeleteMapping("/{cart_id}")
+    public String removeFromCart(@PathVariable Long cart_id) {
+        return cartService.removeFromCart(cart_id);
     }
 
     @PostMapping("/add/{car_id}")
