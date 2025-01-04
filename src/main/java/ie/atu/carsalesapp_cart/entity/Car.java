@@ -6,12 +6,13 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-//@Data
+@Data
 @Table(name = "car")
 public class Car {
     @Id
@@ -36,44 +37,4 @@ public class Car {
     @NotNull(message="cost cannot be 0")
     private double cost;
 
-
-    public long getCar_id() {
-        return car_id;
-    }
-
-    public void setCar_id(Long car_id) {
-        this.car_id = car_id;
-    }
-
-    public String getMake() {
-        return make;
-    }
-
-    public void setMake(String make) {
-        this.make = make;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
 }

@@ -5,12 +5,9 @@ import ie.atu.carsalesapp_cart.entity.Car;
 import ie.atu.carsalesapp_cart.entity.Cart;
 import ie.atu.carsalesapp_cart.service.CartService;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/cart")
@@ -30,12 +27,12 @@ public class CartController {
     }
 
     @DeleteMapping("/{cart_id}")
-    public String removeFromCart(@PathVariable Long cart_id) {
+    public String removeFromCart(@Valid @PathVariable Long cart_id) {
         return cartService.removeFromCart(cart_id);
     }
 
     @PostMapping("/add/{car_id}")
-    public Cart addCarToCart(@PathVariable Long car_id) {
+    public Cart addCarToCart(@Valid @PathVariable Long car_id) {
         return cartService.addCarToCart(car_id);
     }
 
